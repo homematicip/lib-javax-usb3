@@ -18,7 +18,6 @@ import java.util.List;
 import javax.usb3.descriptor.UsbDeviceDescriptor;
 import javax.usb3.enumerated.EUSBClassCode;
 import javax.usb3.exception.UsbPlatformException;
-import javax.usb3.utility.JNINativeLibraryLoader;
 import javax.usb3.utility.UsbExceptionFactory;
 import org.junit.Test;
 import org.usb4java.*;
@@ -34,7 +33,7 @@ public class UsbDeviceManagerTest {
 
   @Test
   public void testSomeMethod() throws UsbPlatformException {
-    JNINativeLibraryLoader.load();
+    Loader.load();
     Context jniContext = new Context();
     final int init = LibUsb.init(jniContext);
 

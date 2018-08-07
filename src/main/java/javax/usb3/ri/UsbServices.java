@@ -23,7 +23,8 @@ import javax.usb3.IUsbServices;
 import javax.usb3.event.IUsbServicesListener;
 import javax.usb3.event.UsbServicesEvent;
 import javax.usb3.exception.UsbException;
-import javax.usb3.utility.JNINativeLibraryLoader;
+
+import org.usb4java.Loader;
 
 /**
  * Implementation of JSR-80 IUsbServices interface.
@@ -82,7 +83,7 @@ public final class UsbServices implements IUsbServices {
      * native libusb wrapper (usb4java JNI) library.
      */
     this.config = new UsbServiceInstanceConfiguration();
-    JNINativeLibraryLoader.load();
+    Loader.load();
     /**
      * Scan the USB tree to identify the system ROOT USB hub.
      */
