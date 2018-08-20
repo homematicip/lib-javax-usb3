@@ -24,6 +24,8 @@ import javax.usb3.exception.UsbNotActiveException;
 import javax.usb3.exception.UsbException;
 import javax.usb3.exception.UsbDisconnectedException;
 import java.util.List;
+
+import javax.usb3.event.IUsbPipeEventListener;
 import javax.usb3.event.IUsbPipeListener;
 
 /**
@@ -421,5 +423,17 @@ public interface IUsbPipe {
    * @param listener The IIUsbPipeListener.
    */
   public void removeUsbPipeListener(IUsbPipeListener listener);
+  
+  /**
+   * Adds a listener for USB input communication
+   * @param listener IUsbPipeEventListener
+   */
+  public void addUsbListener(IUsbPipeEventListener listener);
+  
+  /**
+   * Removes a USB pipe listener
+   * @param listener IUsbPipeEventListener
+   */
+  public void removeUsbListener(IUsbPipeEventListener listener);
 
 }

@@ -71,7 +71,7 @@ public class UsbPipeDataEvent extends UsbPipeEvent {
    * @return The transferred data.
    */
   public byte[] getData() {
-    if (hasUsbIrp()) {
+    if (hasUsbIrp()&&getUsbIrp().getActualLength()>0) {
       byte[] newData = new byte[getUsbIrp().getActualLength()];
       System.arraycopy(getUsbIrp().getData(), getUsbIrp().getOffset(), newData, 0, newData.length);
       return newData;

@@ -19,9 +19,11 @@ package javax.usb3.ri;
 
 import java.util.List;
 import javax.usb3.*;
+import javax.usb3.event.IUsbPipeEventListener;
 import javax.usb3.event.IUsbPipeListener;
 import javax.usb3.event.UsbPipeDataEvent;
 import javax.usb3.event.UsbPipeErrorEvent;
+import javax.usb3.event.UsbPipeReader;
 import javax.usb3.exception.UsbException;
 import javax.usb3.exception.UsbNotActiveException;
 import javax.usb3.exception.UsbNotClaimedException;
@@ -54,6 +56,11 @@ public final class UsbPipe implements IUsbPipe {
    * The USB I/O Request Packet (IRP) queue manager.
    */
   private final UsbIrpQueue iprQueue;
+  
+  /**
+   * Reader thread to async read the usb pipe
+   */
+  private UsbPipeReader reader;
 
   /**
    * Construct a new USB Pipe attached to the indicated UsbEndpoint.
@@ -323,5 +330,27 @@ public final class UsbPipe implements IUsbPipe {
   public String toString() {
     return String.format("USB pipe of endpoint %s",
                          this.endpoint.getUsbEndpointDescriptor());
+  }
+  
+  /**
+   * Creates the usbPipe reader that notifys listener when there are some messages on the usb pipe
+   * @param listener
+   */
+  public void addUsbListener(IUsbPipeEventListener listener) {
+	  if (reader==null) {
+		  reader = new UsbPipeReader(this);
+	  }
+	  reader.addListener(listener);
+  }
+  
+  /**
+   * Removes a usb listener
+   * @param listener
+   */
+  public void removeUsbListener(IUsbPipeEventListener listener) {
+	  if (reader==null) {
+		  reader = new UsbPipeReader(this);
+	  }
+	  reader.removeListener(listener);
   }
 }
