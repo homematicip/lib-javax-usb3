@@ -435,5 +435,11 @@ public interface IUsbPipe {
    * @param listener IUsbPipeEventListener
    */
   public void removeUsbListener(IUsbPipeEventListener listener);
+  
+  public void pauseUsbListener();
+  
+  public void resumeUsbListener();
+  
+  public boolean isPausedUsbListener();
 
 }

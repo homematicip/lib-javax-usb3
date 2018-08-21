@@ -353,4 +353,16 @@ public final class UsbPipe implements IUsbPipe {
 	  }
 	  reader.removeListener(listener);
   }
+  
+  public void pauseUsbListener() {
+	  reader.pauseReader();
+  }
+  
+  public void resumeUsbListener() {
+	  reader.resumeReader();
+  }
+  
+  public boolean isPausedUsbListener() {
+	  return reader.isPauseReader();
+  }
 }
